@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNS.STUDIO</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Helvetica Neue",Arial,sans-serif;color:#111;background:#fff;padding-bottom:90px}
+.header{text-align:center;padding:26px 16px 18px;font-size:28px;letter-spacing:6px;font-weight:300}
+.hero-strip{overflow:hidden;width:100%;margin:0 0 34px}
+.hero-track{display:flex;width:max-content;gap:8px;animation:heroScroll 28s linear infinite}
+.hero-strip:hover .hero-track{animation-play-state:paused}
+.hero-slide{width:190px;height:270px;object-fit:cover;flex:0 0 auto;background:#f5f5f5}
+@keyframes heroScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:480px){
+.hero-slide{width:165px;height:235px}
+.hero-track{animation-duration:24s}
+}
+.categories{display:flex;gap:20px;padding:16px;overflow:auto;border-bottom:1px solid #eee;white-space:nowrap;text-transform:uppercase;font-size:13px}
+.category.active{border-bottom:1px solid #111}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px}
+.card{border:1px solid #eee;padding:10px;cursor:pointer;display:flex;flex-direction:column}
+.card img{width:100%;height:280px;object-fit:contain}
+.name{font-size:18px;font-weight:300;height:50px;margin-top:15px}
+.price{margin:10px 0}
+button{padding:12px;background:#111;color:#fff;border:0;cursor:pointer}
+.cart-icon{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.cart-bar{position:fixed;bottom:20px;left:20px;right:20px;background:#111;color:#fff;border-radius:35px;padding:15px 25px;display:flex;justify-content:space-between;z-index:5}
+.modal{display:none;position:fixed;inset:0;background:#fff;z-index:10;padding:0 20px 110px;overflow:auto}
+.modal-top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);padding:14px 0;border-bottom:1px solid #eee;margin-bottom:12px}
+.back-button{background:#fff;color:#111;border:1px solid #111;padding:10px 16px;font-size:15px}
+.product-actions{display:grid;gap:10px;margin-top:18px}
+.gallery-missing{width:90px;min-height:82px;border:1px dashed #bbb;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;padding:5px;color:#777;flex:0 0 auto}
+.product-img{width:100%;height:350px;object-fit:contain}
+.gallery-thumbs{display:flex;gap:10px;overflow-x:auto;margin:12px 0 22px;padding-bottom:4px}
+.gallery-thumb{width:68px;height:82px;object-fit:cover;border:1px solid #ddd;cursor:pointer;flex:0 0 auto;background:#fafafa}
+.gallery-thumb.active{border:2px solid #111}
+.size{display:inline-block;border:1px solid #111;padding:10px;margin:5px;cursor:pointer}
+.size.selected{background:#111;color:#fff}
+.cart-item{display:flex;gap:12px;border-bottom:1px solid #eee;padding:12px 0;align-items:center}
+.cart-item img{width:70px;height:90px;object-fit:contain}
+.qty button{padding:5px 10px;margin:3px}
+.remove{background:#fff;color:#111;border:1px solid #111}
+
+.size-help{margin:18px 0 20px;padding:15px;border:1px solid #e5e5e5;font-size:13px;line-height:1.55;font-weight:300}
+.size-help a{color:#111;text-decoration:underline;text-underline-offset:3px}
+.size-chart{width:100%;border-collapse:collapse;margin:14px 0 12px;font-size:12px}
+.size-chart th,.size-chart td{border:1px solid #e2e2e2;padding:8px 6px;text-align:center;font-weight:300}
+.size-chart th{font-weight:400;background:#fafafa}
+.size-chart tr.active-size td{background:#111;color:#fff;border-color:#111}
+.size-chart-title{font-size:14px;font-weight:400;margin:18px 0 8px}
+</style>
+</head>
+<body>
+
+<div class="header">UNS.STUDIO</div>
+<div class="hero-strip">
+  <div class="hero-track">
+    <img class="hero-slide" src="images/banner_1.png" alt="">
+    <img class="hero-slide" src="images/banner_2.png" alt="">
+    <img class="hero-slide" src="images/banner_3.png" alt="">
+    <img class="hero-slide" src="images/banner_4.png" alt="">
+    <img class="hero-slide" src="images/banner_5.png" alt="">
+    <img class="hero-slide" src="images/banner_6.png" alt="">
+    <img class="hero-slide" src="images/banner_1.png" alt="">
+    <img class="hero-slide" src="images/banner_2.png" alt="">
+    <img class="hero-slide" src="images/banner_3.png" alt="">
+    <img class="hero-slide" src="images/banner_4.png" alt="">
+    <img class="hero-slide" src="images/banner_5.png" alt="">
+    <img class="hero-slide" src="images/banner_6.png" alt="">
+  </div>
+</div>
+<div class="categories" id="categories"></div>
+<div class="grid" id="products"></div>
+
+<div class="cart-bar" onclick="openCart()"><svg class="cart-icon" viewBox="0 0 24 24">
+<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+<line x1="3" y1="6" x2="21" y2="6"/>
+<path d="M8 10c0 2.2 1.8 4 4 4s4-1.8 4-4"/>
+</svg>
+Корзина (<span id="count">0</span>) <span id="sum">0 ₽</span></div>
+
+<div class="modal" id="productModal">
+<div class="modal-top"><button type="button" class="back-button" onclick="closeProduct()">← Назад</button></div>
+<img id="bigImg" class="product-img" alt="Фото товара">
+<div class="gallery-thumbs" id="galleryThumbs"></div>
+<h2 id="pName"></h2>
+<p id="pPrice"></p>
+<p id="pDesc"></p>
+<p><strong>Состав:</strong> <span id="pComp"></span></p>
+<h3>Размер</h3>
+<div id="sizes">
+<button type="button" class="size" data-size="XS">XS</button><button type="button" class="size" data-size="S">S</button><button type="button" class="size" data-size="M">M</button><button type="button" class="size" data-size="L">L</button><button type="button" class="size" data-size="XL">XL</button>
+</div>
+
+<div class="size-chart-title">Размерная сетка</div>
+<table class="size-chart">
+  <thead>
+    <tr>
+      <th>Размер</th>
+      <th>EU</th>
+      <th>ОГ / ОТ / ОБ</th>
+      <th>RU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-size="XS"><td>XS</td><td>32</td><td>84 / 66 / 87</td><td>40</td></tr>
+    <tr data-size="S"><td>S</td><td>34</td><td>87 / 70 / 92</td><td>42</td></tr>
+    <tr data-size="M"><td>M</td><td>36</td><td>92 / 74 / 96</td><td>44</td></tr>
+    <tr data-size="L"><td>L</td><td>38</td><td>98 / 78 / 102</td><td>46</td></tr>
+    <tr data-size="XL"><td>XL</td><td>40</td><td>103 / 82 / 106</td><td>48</td></tr>
+  </tbody>
+</table>
+
+<div class="size-help">
+Если вы сомневаетесь, какой у вас размер, или не нашли нужный,
+<a href="https://t.me/alexrom_35?text=Здравствуйте!%20Помогите,%20пожалуйста,%20подобрать%20размер.%20Также%20хочу%20узнать%20об%20индивидуальном%20пошиве.">напишите нам</a>.
+Мы поможем с выбором, посоветуем лучший вариант или предложим индивидуальный пошив.
+</div>
+<div class="product-actions"><button type="button" onclick="addProduct()">Добавить в корзину</button><button type="button" class="back-button" onclick="closeProduct()">← Назад к товарам</button></div>
+</div>
+
+<div class="modal" id="cartModal">
+<h2>Корзина</h2>
+<div id="cartItems"></div>
+<h3 id="cartTotal"></h3>
+<button onclick="orderTelegram()">Оформить заказ</button>
+<button onclick="closeModal()">Продолжить покупки</button>
+</div>
+
+<script>
+const productsEl=document.getElementById("products");
+const categoriesEl=document.getElementById("categories");
+const productModal=document.getElementById("productModal");
+const cartModal=document.getElementById("cartModal");
+const bigImg=document.getElementById("bigImg");
+const galleryThumbs=document.getElementById("galleryThumbs");
+const pName=document.getElementById("pName");
+const pPrice=document.getElementById("pPrice");
+const pDesc=document.getElementById("pDesc");
+const pComp=document.getElementById("pComp");
+const countEl=document.getElementById("count");
+const sumEl=document.getElementById("sum");
+const cartItemsEl=document.getElementById("cartItems");
+const cartTotalEl=document.getElementById("cartTotal");
+const products=[
+{images:["product_1.png","product_1_1.png"],name:"Платье миди белое",price:12990,desc:"Элегантное платье миди",composition:"70% вискоза, 30% полиэстер",category:"Платья"},
+{images:["product_2.PNG","product_2_1.png","product_2_2.png","product_2_3.png","product_2_4.png","product_2_5.png","product_2_6.png"],name:"Платье миди чёрное",price:14990,desc:"Классическое платье",composition:"65% вискоза, 30% полиэстер, 5% эластан",category:"Платья"},
+{images:["product_3.png","product_3_1.png"],name:"Платье тёмно-синее с воротником",price:7890,desc:"Платье с воротником",composition:"55% хлопок, 45% вискоза",category:"Платья"},
+{images:["product_4.png"],name:"Платье графит макси",price:7590,desc:"Платье макси",composition:"72% вискоза, 28% полиэстер",category:"Платья"},
+{images:["product_5.PNG"],name:"Рубашка чёрная укороченная",price:5690,desc:"Укороченная рубашка",composition:"100% хлопок",category:"Рубашки"},
+{images:["product_6.png"],name:"Рубашка голубая",price:6590,desc:"Базовая рубашка",composition:"100% хлопок",category:"Рубашки"},
+{images:["product_7.png","product_7_1.png","product_7_2.png","product_7_3.png"],name:"Рубашка белая в полоску",price:6990,desc:"Рубашка в полоску",composition:"98% хлопок, 2% эластан",category:"Рубашки"},
+{images:["product_8.png"],name:"Юбка белая миди",price:8590,desc:"Юбка миди",composition:"70% вискоза, 30% полиэстер",category:"Юбки"},
+{images:["product_9.png"],name:"Юбка графит миди",price:8590,desc:"Юбка миди",composition:"68% полиэстер, 28% вискоза, 4% эластан",category:"Юбки"},
+{images:["product_10.png","product_10_1.png","product_10_2.png"],name:"Юбка бежевая",price:8590,desc:"Юбка",composition:"60% вискоза, 35% полиэстер, 5% эластан",category:"Юбки"},
+{images:["product_11.png"],name:"Юбка мини",price:6990,desc:"Юбка мини",composition:"55% хлопок, 42% полиэстер, 3% эластан",category:"Юбки"},
+{images:["product_12.png"],name:"Брюки бежевые",price:8990,desc:"Брюки",composition:"64% полиэстер, 33% вискоза, 3% эластан",category:"Брюки"},
+{images:["product_13.png","product_13_1.png","product_13_2.png"],name:"Бомбер тёмно-синий",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
+{images:["product_14.png","product_14_1.png","product_14_2.png","product_14_4.png","product_14_5.png"],name:"Бомбер бежевый",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
+{images:["product_15.png"],name:"Бомбер белый",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
+{images:["product_16.png","product_16_1.png"],name:"Жилет чёрный из льна",price:7590,desc:"Чёрный жилет из льна",composition:"Лён",category:"Жилеты"},
+{images:["product_17.png","product_17_1.png","product_17_2.png","product_17_3.png"],name:"Тренч реглан",price:16890,desc:"Тренч свободного кроя с рукавом реглан",composition:"Состав уточняется",category:"Тренчи"},
+{images:["product_18.png","product_18_2.png","product_18_3.png"],name:"Платье из 100% вискозы чёрное",price:10990,desc:"Чёрное платье из вискозы",composition:"100% вискоза",category:"Платья"},
+{images:["product_19.png","product_19_2.png","product_19_3.png"],name:"Джинсы из хлопка",price:7590,desc:"Джинсы из хлопка",composition:"Хлопок",category:"Джинсы"},
+{images:["product_20.png","product_20_2.png","product_20_3.png"],name:"Платье поло",price:7990,desc:"Платье в стиле поло",composition:"Состав уточняется",category:"Платья"},
+{images:["product_21.png","product_21_2.png","product_21_3.png"],name:"Жакет в шоколадном оттенке",price:10990,desc:"Жакет в шоколадном оттенке",composition:"Состав уточняется",category:"Жакеты"},
+{images:["product_22.png","product_22_2.png","product_22_3.png"],name:"Брюки в шоколадном оттенке",price:7590,desc:"Брюки в шоколадном оттенке",composition:"Состав уточняется",category:"Брюки"},
+{images:["product_23.png","product_23_2.png","product_23_3.png"],name:"Тренч однобортный",price:15990,desc:"Однобортный тренч",composition:"Состав уточняется",category:"Тренчи"},
+{images:["product_24.png","product_24_2.png","product_24_3.png"],name:"Тренч двубортный укороченный",price:14990,desc:"Укороченный двубортный тренч",composition:"Состав уточняется",category:"Тренчи"},
+{images:["product_25.png","product_25_2.png","product_25_3.png"],name:"Шорты в шоколадном оттенке",price:5590,desc:"Шорты в шоколадном оттенке",composition:"Состав уточняется",category:"Шорты"},
+{images:["product_26.png","product_26_2.png","product_26_3.png"],name:"Ветровка из хлопка",price:13990,desc:"Ветровка из хлопка",composition:"Хлопок",category:"Верхняя одежда"}
+];
+
+
+let categoryMap={"Все":products};
+[...new Set(products.map(p=>p.category))].forEach(category=>{
+categoryMap[category]=products.filter(p=>p.category===category);
+});
+let current=products[0], size="", cart=[];
+
+categoriesEl.innerHTML=Object.keys(categoryMap).map((x,i)=>`<div class="category ${i==0?'active':''}" onclick="filter('${x}',this)">${x}</div>`).join("");
+
+function render(list){
+ productsEl.innerHTML=list.map(p=>`
+ <div class="card" onclick="openProduct(${products.indexOf(p)})">
+ <img src="images/${p.images[0]}" onerror="this.style.opacity=.25"><div class="name">${p.name}</div><div>${p.price.toLocaleString()} ₽</div>
+ </div>`).join("");
+}
+function filter(c,e){document.querySelectorAll('.category').forEach(x=>x.classList.remove('active'));e.classList.add('active');render(categoryMap[c]);}
+render(products);
+
+function loadGallery(images){
+ galleryThumbs.innerHTML="";
+ images.filter(Boolean).forEach((img,index)=>{
+   const wrap=document.createElement("div");
+   const thumb=document.createElement("img");
+   thumb.className="gallery-thumb"+(index===0?" active":"");
+   thumb.src="images/"+img;
+   thumb.alt="Фото товара "+(index+1);
+   thumb.addEventListener("click",()=>changeMainImage(img,thumb));
+   thumb.addEventListener("error",()=>{
+     wrap.className="gallery-missing";
+     wrap.textContent="Нет файла: "+img;
+     thumb.remove();
+   });
+   wrap.appendChild(thumb);
+   galleryThumbs.appendChild(wrap);
+ });
+}
+
+function openProduct(index){
+ current=products[index];
+ size="";
+ document.querySelectorAll(".size").forEach(x=>x.classList.remove("selected"));
+document.querySelectorAll(".size-chart tbody tr").forEach(row=>row.classList.remove("active-size"));
+ bigImg.onerror=()=>{bigImg.removeAttribute("src");bigImg.alt="Добавьте файл images/"+current.images[0];};
+ bigImg.src="images/"+current.images[0];
+ pName.textContent=current.name;
+ pPrice.textContent=current.price.toLocaleString()+" ₽";
+ pDesc.textContent=current.desc;
+ pComp.textContent=current.composition;
+ loadGallery(current.images);
+ productModal.style.display="block";
+ productModal.scrollTop=0;
+}
+
+function changeMainImage(img,thumb){
+bigImg.src="images/"+img;
+document.querySelectorAll(".gallery-thumb").forEach(x=>x.classList.remove("active"));
+thumb.classList.add("active");
+}
+document.querySelectorAll(".size").forEach(s=>s.addEventListener("click",()=>{
+ document.querySelectorAll(".size").forEach(x=>x.classList.remove("selected"));
+ document.querySelectorAll(".size-chart tbody tr").forEach(row=>row.classList.remove("active-size"));
+ s.classList.add("selected");
+ size=s.dataset.size||s.textContent.trim();
+ const selectedRow=document.querySelector(`.size-chart tbody tr[data-size="${size}"]`);
+ if(selectedRow)selectedRow.classList.add("active-size");
+}));
+function addProduct(){if(!size)return alert("Выберите размер");let f=cart.find(x=>x.name==current.name&&x.size==size);f?f.qty++:cart.push({name:current.name,img:current.images[0],price:current.price,size,qty:1});update();closeModal();}
+function update(){countEl.innerHTML=cart.reduce((a,b)=>a+b.qty,0);sumEl.innerHTML=cart.reduce((a,b)=>a+b.price*b.qty,0).toLocaleString()+" ₽";}
+function openCart(){cartItemsEl.innerHTML=cart.map((x,i)=>`<div class="cart-item"><img src="images/${x.img}"><div>${x.name}<br>Размер: ${x.size}<br>${x.price} ₽<div class="qty"><button onclick="change(${i},-1)">−</button>${x.qty}<button onclick="change(${i},1)">＋</button><button class="remove" onclick="del(${i})">✕</button></div></div></div>`).join("");cartTotalEl.innerHTML=sumEl.innerHTML;cartModal.style.display="block";}
+function change(i,n){cart[i].qty+=n;if(cart[i].qty<1)cart.splice(i,1);update();openCart();}
+function del(i){cart.splice(i,1);update();openCart();}
+function orderTelegram(){let text="Здравствуйте! Хочу оформить заказ:%0A"+cart.map(x=>`${x.name}, размер ${x.size}, количество ${x.qty}`).join("%0A")+"%0AИтого: "+sumEl.innerHTML;location.href="https://t.me/alexrom_35?text="+text;}
+function closeProduct(){productModal.style.display="none";}
+function closeModal(){document.querySelectorAll(".modal").forEach(x=>x.style.display="none");}
+</script>
+</body>
+</html>
