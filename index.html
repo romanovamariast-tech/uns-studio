@@ -56,18 +56,18 @@ button{padding:12px;background:#111;color:#fff;border:0;cursor:pointer}
 <div class="header">UNS.STUDIO</div>
 <div class="hero-strip">
   <div class="hero-track">
-    <img class="hero-slide" src="images/banner_1.png" alt="">
-    <img class="hero-slide" src="images/banner_2.png" alt="">
-    <img class="hero-slide" src="images/banner_3.png" alt="">
-    <img class="hero-slide" src="images/banner_4.png" alt="">
-    <img class="hero-slide" src="images/banner_5.png" alt="">
-    <img class="hero-slide" src="images/banner_6.png" alt="">
-    <img class="hero-slide" src="images/banner_1.png" alt="">
-    <img class="hero-slide" src="images/banner_2.png" alt="">
-    <img class="hero-slide" src="images/banner_3.png" alt="">
-    <img class="hero-slide" src="images/banner_4.png" alt="">
-    <img class="hero-slide" src="images/banner_5.png" alt="">
-    <img class="hero-slide" src="images/banner_6.png" alt="">
+    <img class="hero-slide" src="banner_1." alt="">
+    <img class="hero-slide" src="banner_2." alt="">
+    <img class="hero-slide" src="banner_3." alt="">
+    <img class="hero-slide" src="banner_4." alt="">
+    <img class="hero-slide" src="banner_5." alt="">
+    <img class="hero-slide" src="banner_6." alt="">
+    <img class="hero-slide" src="banner_1." alt="">
+    <img class="hero-slide" src="banner_2." alt="">
+    <img class="hero-slide" src="banner_3." alt="">
+    <img class="hero-slide" src="banner_4." alt="">
+    <img class="hero-slide" src="banner_5." alt="">
+    <img class="hero-slide" src="banner_6." alt="">
   </div>
 </div>
 <div class="categories" id="categories"></div>
@@ -144,32 +144,32 @@ const sumEl=document.getElementById("sum");
 const cartItemsEl=document.getElementById("cartItems");
 const cartTotalEl=document.getElementById("cartTotal");
 const products=[
-{images:["product_1.png","product_1_1.png"],name:"Платье миди белое",price:12990,desc:"Элегантное платье миди",composition:"70% вискоза, 30% полиэстер",category:"Платья"},
-{images:["product_2.PNG","product_2_1.png","product_2_2.png","product_2_3.png","product_2_4.png","product_2_5.png","product_2_6.png"],name:"Платье миди чёрное",price:14990,desc:"Классическое платье",composition:"65% вискоза, 30% полиэстер, 5% эластан",category:"Платья"},
-{images:["product_3.png","product_3_1.png"],name:"Платье тёмно-синее с воротником",price:7890,desc:"Платье с воротником",composition:"55% хлопок, 45% вискоза",category:"Платья"},
-{images:["product_4.png"],name:"Платье графит макси",price:7590,desc:"Платье макси",composition:"72% вискоза, 28% полиэстер",category:"Платья"},
-{images:["product_5.PNG"],name:"Рубашка чёрная укороченная",price:5690,desc:"Укороченная рубашка",composition:"100% хлопок",category:"Рубашки"},
-{images:["product_6.png"],name:"Рубашка голубая",price:6590,desc:"Базовая рубашка",composition:"100% хлопок",category:"Рубашки"},
-{images:["product_7.png","product_7_1.png","product_7_2.png","product_7_3.png"],name:"Рубашка белая в полоску",price:6990,desc:"Рубашка в полоску",composition:"98% хлопок, 2% эластан",category:"Рубашки"},
-{images:["product_8.png"],name:"Юбка белая миди",price:8590,desc:"Юбка миди",composition:"70% вискоза, 30% полиэстер",category:"Юбки"},
-{images:["product_9.png"],name:"Юбка графит миди",price:8590,desc:"Юбка миди",composition:"68% полиэстер, 28% вискоза, 4% эластан",category:"Юбки"},
-{images:["product_10.png","product_10_1.png","product_10_2.png"],name:"Юбка бежевая",price:8590,desc:"Юбка",composition:"60% вискоза, 35% полиэстер, 5% эластан",category:"Юбки"},
-{images:["product_11.png"],name:"Юбка мини",price:6990,desc:"Юбка мини",composition:"55% хлопок, 42% полиэстер, 3% эластан",category:"Юбки"},
-{images:["product_12.png"],name:"Брюки бежевые",price:8990,desc:"Брюки",composition:"64% полиэстер, 33% вискоза, 3% эластан",category:"Брюки"},
-{images:["product_13.png","product_13_1.png","product_13_2.png"],name:"Бомбер тёмно-синий",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
-{images:["product_14.png","product_14_1.png","product_14_2.png","product_14_4.png","product_14_5.png"],name:"Бомбер бежевый",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
-{images:["product_15.png"],name:"Бомбер белый",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
-{images:["product_16.png","product_16_1.png"],name:"Жилет чёрный из льна",price:7590,desc:"Чёрный жилет из льна",composition:"Лён",category:"Жилеты"},
-{images:["product_17.png","product_17_1.png","product_17_2.png","product_17_3.png"],name:"Тренч реглан",price:16890,desc:"Тренч свободного кроя с рукавом реглан",composition:"Состав уточняется",category:"Тренчи"},
-{images:["product_18.png","product_18_2.png","product_18_3.png"],name:"Платье из 100% вискозы чёрное",price:10990,desc:"Чёрное платье из вискозы",composition:"100% вискоза",category:"Платья"},
-{images:["product_19.png","product_19_2.png","product_19_3.png"],name:"Джинсы из хлопка",price:7590,desc:"Джинсы из хлопка",composition:"Хлопок",category:"Джинсы"},
-{images:["product_20.png","product_20_2.png","product_20_3.png"],name:"Платье поло",price:7990,desc:"Платье в стиле поло",composition:"Состав уточняется",category:"Платья"},
-{images:["product_21.png","product_21_2.png","product_21_3.png"],name:"Жакет в шоколадном оттенке",price:10990,desc:"Жакет в шоколадном оттенке",composition:"Состав уточняется",category:"Жакеты"},
-{images:["product_22.png","product_22_2.png","product_22_3.png"],name:"Брюки в шоколадном оттенке",price:7590,desc:"Брюки в шоколадном оттенке",composition:"Состав уточняется",category:"Брюки"},
-{images:["product_23.png","product_23_2.png","product_23_3.png"],name:"Тренч однобортный",price:15990,desc:"Однобортный тренч",composition:"Состав уточняется",category:"Тренчи"},
-{images:["product_24.png","product_24_2.png","product_24_3.png"],name:"Тренч двубортный укороченный",price:14990,desc:"Укороченный двубортный тренч",composition:"Состав уточняется",category:"Тренчи"},
-{images:["product_25.png","product_25_2.png","product_25_3.png"],name:"Шорты в шоколадном оттенке",price:5590,desc:"Шорты в шоколадном оттенке",composition:"Состав уточняется",category:"Шорты"},
-{images:["product_26.png","product_26_2.png","product_26_3.png"],name:"Ветровка из хлопка",price:13990,desc:"Ветровка из хлопка",composition:"Хлопок",category:"Верхняя одежда"}
+{images:["product_1.","product_1_1."],name:"Платье миди белое",price:12990,desc:"Элегантное платье миди",composition:"70% вискоза, 30% полиэстер",category:"Платья"},
+{images:["product_2.","product_2_1.","product_2_2.","product_2_3.","product_2_4.","product_2_5.","product_2_6."],name:"Платье миди чёрное",price:14990,desc:"Классическое платье",composition:"65% вискоза, 30% полиэстер, 5% эластан",category:"Платья"},
+{images:["product_3.","product_3_1."],name:"Платье тёмно-синее с воротником",price:7890,desc:"Платье с воротником",composition:"55% хлопок, 45% вискоза",category:"Платья"},
+{images:["product_4."],name:"Платье графит макси",price:7590,desc:"Платье макси",composition:"72% вискоза, 28% полиэстер",category:"Платья"},
+{images:["product_5."],name:"Рубашка чёрная укороченная",price:5690,desc:"Укороченная рубашка",composition:"100% хлопок",category:"Рубашки"},
+{images:["product_6."],name:"Рубашка голубая",price:6590,desc:"Базовая рубашка",composition:"100% хлопок",category:"Рубашки"},
+{images:["product_7.","product_7_1.","product_7_2.","product_7_3."],name:"Рубашка белая в полоску",price:6990,desc:"Рубашка в полоску",composition:"98% хлопок, 2% эластан",category:"Рубашки"},
+{images:["product_8."],name:"Юбка белая миди",price:8590,desc:"Юбка миди",composition:"70% вискоза, 30% полиэстер",category:"Юбки"},
+{images:["product_9."],name:"Юбка графит миди",price:8590,desc:"Юбка миди",composition:"68% полиэстер, 28% вискоза, 4% эластан",category:"Юбки"},
+{images:["product_10.","product_10_1.","product_10_2."],name:"Юбка бежевая",price:8590,desc:"Юбка",composition:"60% вискоза, 35% полиэстер, 5% эластан",category:"Юбки"},
+{images:["product_11."],name:"Юбка мини",price:6990,desc:"Юбка мини",composition:"55% хлопок, 42% полиэстер, 3% эластан",category:"Юбки"},
+{images:["product_12."],name:"Брюки бежевые",price:8990,desc:"Брюки",composition:"64% полиэстер, 33% вискоза, 3% эластан",category:"Брюки"},
+{images:["product_13.","product_13_1.","product_13_2."],name:"Бомбер тёмно-синий",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
+{images:["product_14.","product_14_1.","product_14_2.","product_14_4.","product_14_5."],name:"Бомбер бежевый",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
+{images:["product_15."],name:"Бомбер белый",price:10990,desc:"Бомбер",composition:"100% полиэстер; подкладка: 100% вискоза",category:"Бомберы"},
+{images:["product_16.","product_16_1."],name:"Жилет чёрный из льна",price:7590,desc:"Чёрный жилет из льна",composition:"Лён",category:"Жилеты"},
+{images:["product_17.","product_17_1.","product_17_2.","product_17_3."],name:"Тренч реглан",price:16890,desc:"Тренч свободного кроя с рукавом реглан",composition:"Состав уточняется",category:"Тренчи"},
+{images:["product_18.","product_18_2.","product_18_3."],name:"Платье из 100% вискозы чёрное",price:10990,desc:"Чёрное платье из вискозы",composition:"100% вискоза",category:"Платья"},
+{images:["product_19.","product_19_2.","product_19_3."],name:"Джинсы из хлопка",price:7590,desc:"Джинсы из хлопка",composition:"Хлопок",category:"Джинсы"},
+{images:["product_20.","product_20_2.","product_20_3."],name:"Платье поло",price:7990,desc:"Платье в стиле поло",composition:"Состав уточняется",category:"Платья"},
+{images:["product_21.","product_21_2.","product_21_3."],name:"Жакет в шоколадном оттенке",price:10990,desc:"Жакет в шоколадном оттенке",composition:"Состав уточняется",category:"Жакеты"},
+{images:["product_22.","product_22_2.","product_22_3."],name:"Брюки в шоколадном оттенке",price:7590,desc:"Брюки в шоколадном оттенке",composition:"Состав уточняется",category:"Брюки"},
+{images:["product_23.","product_23_2.","product_23_3."],name:"Тренч однобортный",price:15990,desc:"Однобортный тренч",composition:"Состав уточняется",category:"Тренчи"},
+{images:["product_24.","product_24_2.","product_24_3."],name:"Тренч двубортный укороченный",price:14990,desc:"Укороченный двубортный тренч",composition:"Состав уточняется",category:"Тренчи"},
+{images:["product_25.","product_25_2.","product_25_3."],name:"Шорты в шоколадном оттенке",price:5590,desc:"Шорты в шоколадном оттенке",composition:"Состав уточняется",category:"Шорты"},
+{images:["product_26.","product_26_2.","product_26_3."],name:"Ветровка из хлопка",price:13990,desc:"Ветровка из хлопка",composition:"Хлопок",category:"Верхняя одежда"}
 ];
 
 
@@ -184,7 +184,7 @@ categoriesEl.innerHTML=Object.keys(categoryMap).map((x,i)=>`<div class="category
 function render(list){
  productsEl.innerHTML=list.map(p=>`
  <div class="card" onclick="openProduct(${products.indexOf(p)})">
- <img src="images/${p.images[0]}" onerror="this.style.opacity=.25"><div class="name">${p.name}</div><div>${p.price.toLocaleString()} ₽</div>
+ <img src="${p.images[0]}" onerror="this.style.opacity=.25"><div class="name">${p.name}</div><div>${p.price.toLocaleString()} ₽</div>
  </div>`).join("");
 }
 function filter(c,e){document.querySelectorAll('.category').forEach(x=>x.classList.remove('active'));e.classList.add('active');render(categoryMap[c]);}
@@ -196,7 +196,7 @@ function loadGallery(images){
    const wrap=document.createElement("div");
    const thumb=document.createElement("img");
    thumb.className="gallery-thumb"+(index===0?" active":"");
-   thumb.src="images/"+img;
+   thumb.src=""+img;
    thumb.alt="Фото товара "+(index+1);
    thumb.addEventListener("click",()=>changeMainImage(img,thumb));
    thumb.addEventListener("error",()=>{
@@ -214,8 +214,8 @@ function openProduct(index){
  size="";
  document.querySelectorAll(".size").forEach(x=>x.classList.remove("selected"));
 document.querySelectorAll(".size-chart tbody tr").forEach(row=>row.classList.remove("active-size"));
- bigImg.onerror=()=>{bigImg.removeAttribute("src");bigImg.alt="Добавьте файл images/"+current.images[0];};
- bigImg.src="images/"+current.images[0];
+ bigImg.onerror=()=>{bigImg.removeAttribute("src");bigImg.alt="Добавьте файл "+current.images[0];};
+ bigImg.src=""+current.images[0];
  pName.textContent=current.name;
  pPrice.textContent=current.price.toLocaleString()+" ₽";
  pDesc.textContent=current.desc;
@@ -226,7 +226,7 @@ document.querySelectorAll(".size-chart tbody tr").forEach(row=>row.classList.rem
 }
 
 function changeMainImage(img,thumb){
-bigImg.src="images/"+img;
+bigImg.src=""+img;
 document.querySelectorAll(".gallery-thumb").forEach(x=>x.classList.remove("active"));
 thumb.classList.add("active");
 }
@@ -240,7 +240,7 @@ document.querySelectorAll(".size").forEach(s=>s.addEventListener("click",()=>{
 }));
 function addProduct(){if(!size)return alert("Выберите размер");let f=cart.find(x=>x.name==current.name&&x.size==size);f?f.qty++:cart.push({name:current.name,img:current.images[0],price:current.price,size,qty:1});update();closeModal();}
 function update(){countEl.innerHTML=cart.reduce((a,b)=>a+b.qty,0);sumEl.innerHTML=cart.reduce((a,b)=>a+b.price*b.qty,0).toLocaleString()+" ₽";}
-function openCart(){cartItemsEl.innerHTML=cart.map((x,i)=>`<div class="cart-item"><img src="images/${x.img}"><div>${x.name}<br>Размер: ${x.size}<br>${x.price} ₽<div class="qty"><button onclick="change(${i},-1)">−</button>${x.qty}<button onclick="change(${i},1)">＋</button><button class="remove" onclick="del(${i})">✕</button></div></div></div>`).join("");cartTotalEl.innerHTML=sumEl.innerHTML;cartModal.style.display="block";}
+function openCart(){cartItemsEl.innerHTML=cart.map((x,i)=>`<div class="cart-item"><img src="${x.img}"><div>${x.name}<br>Размер: ${x.size}<br>${x.price} ₽<div class="qty"><button onclick="change(${i},-1)">−</button>${x.qty}<button onclick="change(${i},1)">＋</button><button class="remove" onclick="del(${i})">✕</button></div></div></div>`).join("");cartTotalEl.innerHTML=sumEl.innerHTML;cartModal.style.display="block";}
 function change(i,n){cart[i].qty+=n;if(cart[i].qty<1)cart.splice(i,1);update();openCart();}
 function del(i){cart.splice(i,1);update();openCart();}
 function orderTelegram(){let text="Здравствуйте! Хочу оформить заказ:%0A"+cart.map(x=>`${x.name}, размер ${x.size}, количество ${x.qty}`).join("%0A")+"%0AИтого: "+sumEl.innerHTML;location.href="https://t.me/alexrom_35?text="+text;}
